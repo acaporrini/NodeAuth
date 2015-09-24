@@ -32,13 +32,14 @@ router.post('/register',upload.single('profileimage'), function(req, res, next){
   //Check for image field
   if(req.file){
     console.log('Uploading file');
+    console.log(req.file);
     //File Info
-    var profileImageOriginalName = req.file.profileimage.originalname;
-    var profileImageName = req.file.profileimage.name;
-    var profileImageMime = req.file.profileimage.mymetype;
-    var profileImagePath = req.file.profileimage.path;
-    var profileImageExt = req.file.profileimage.extension;
-    var profileImageSize = req.file.profileimage.size;
+    var profileImageOriginalName = req.file.originalname;
+    var profileImageName = req.file.filename;
+    var profileImageMime = req.file.mymetype;
+    var profileImagePath = req.file.path;
+    var profileImageExt = req.file.extension;
+    var profileImageSize = req.file.size;
 
   }
   else {
@@ -137,8 +138,8 @@ router.post('/login', passport.authenticate('local',{failureRedirect:'/users/log
   res.redirect('/');
 });
 
-router.logout('/logout',function(req,res){
-  req.logout;
+router.get('/logout',function(req,res){
+  req.logout();
   req.flash('success','You have logged out');
   res.redirect('/users/login');
 });

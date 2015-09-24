@@ -70,6 +70,10 @@ app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);
   next();
 });
+app.get('*',function(req,res,next){
+  res.locals.user = req.isAuthenticated();
+  next();
+});
 
 app.use('/', routes);
 app.use('/users', users);
